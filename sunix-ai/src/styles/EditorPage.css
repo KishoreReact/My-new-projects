@@ -1,17 +1,25 @@
 .editor-container {
-    padding: 20px;
-  }
-  
-  .upload-section {
-    display: flex;
-    align-items: center;
-  }
-  
-  .upload-input {
-    display: none;
-  }
-  
-  .upload-button {
-    margin-left: 10px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-section {
+  margin-bottom: 20px;
+}
+
+.media-display {
+  position: relative;
+}
+
+.canvas-container {
+  position: relative;
+  width: 800px;
+  height: 450px;
+}
+
+.drawing-canvas {
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 100%;
+}
