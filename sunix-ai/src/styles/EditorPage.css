@@ -1,0 +1,17 @@
+.editor-container {
+    padding: 20px;
+  }
+  
+  .upload-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .upload-input {
+    display: none;
+  }
+  
+  .upload-button {
+    margin-left: 10px;
+  }
+  
