@@ -9,7 +9,7 @@ function Navbar() {
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/" className="nav-link">Home</Link>
-          <Link to="/projects" className="nav-link">Projects</Link>
+          {/* <Link to="/projects" className="nav-link">Projects</Link> */}
           <Link to="/editor" className="nav-link">Editor</Link>
         </Typography>
         <IconButton edge="end" color="inherit">

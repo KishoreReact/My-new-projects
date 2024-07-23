@@ -1,10 +1,38 @@
+/* Styles for the Navbar Container */
+.MuiAppBar-root {
+  background-color: #3f51b5;
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Toolbar Styling */
+.MuiToolbar-root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Typography Styling */
+.MuiTypography-root {
+  font-weight: bold;
+}
+
+/* Navigation Link Styles */
 .nav-link {
-    margin-right: 20px;
-    color: white;
-    text-decoration: none;
-  }
-  
-  .nav-link:hover {
-    text-decoration: underline;
-  }
-  
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  color: #c5cae9;
+}
+
+/* Avatar Styles */
+.MuiAvatar-root {
+  background-color: #fff;
+  border: 2px solid #fff;
+}

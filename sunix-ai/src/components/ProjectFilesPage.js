@@ -4,7 +4,7 @@ import '../styles/ProjectFilesPage.css';
 
 function ProjectFilesPage({ project }) {
   return (
-    <div>
+    <div className="project-files-container">
       <h1>{project?.name}</h1>
       <p>Role: {project?.role}</p>
       <p>Creation Date: {project?.creationDate}</p>

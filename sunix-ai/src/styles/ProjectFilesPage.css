@@ -1,0 +1,65 @@
+/* Container for the whole page */
+.project-files-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f6f8;
+  }
+  
+  /* Heading Styles */
+  .project-files-container h1 {
+    font-size: 2rem;
+    color: #3f51b5;
+    margin-bottom: 10px;
+  }
+  
+  .project-files-container h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Paragraph Styles */
+  .project-files-container p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  /* Styles for Table Container */
+  .MuiPaper-root {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  /* Table Header Styles */
+  .MuiTableHead-root {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  .MuiTableCell-head {
+    font-weight: bold;
+  }
+  
+  /* Table Row Styles */
+  .MuiTableRow-root {
+    transition: background-color 0.3s;
+  }
+  
+  .MuiTableRow-root:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Table Cell Styles */
+  .MuiTableCell-root {
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+  }
+  
+  
