@@ -48,3 +48,16 @@
   margin: 16px 0;
 }
 
+/* Default styles */
+.table-container {
+  width: 100%;
+}
+
+/* Media query for mobile views */
+@media (max-width: 600px) {
+  .table-container {
+    width: auto;
+  }
+}
+
+

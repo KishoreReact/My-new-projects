@@ -26,6 +26,7 @@ function EditorPage() {
         img.onload = () => {
           setMedia(img);
           setMediaType('image');
+          setSelectedFrame(null); // Clear selected frame when a new image is uploaded
         };
       } else if (file.type.startsWith('video')) {
         const video = document.createElement('video');
@@ -34,6 +35,7 @@ function EditorPage() {
           extractFrames(video);
           setMedia(video);
           setMediaType('video');
+          setSelectedFrame(null); // Clear selected frame when a new video is uploaded
         };
       }
     }
@@ -46,51 +48,51 @@ function EditorPage() {
     // Clear previous frames
     setFrames([]);
 
-    // Create a thumbnail for the full video
-    drawFrame(video, 0, totalDuration);
-
     video.addEventListener('seeked', function extract() {
-      if (video.currentTime < totalDuration) {
-        drawFrame(video, video.currentTime, video.currentTime + frameInterval);
+      if (video.currentTime <= totalDuration) {
+        drawFrame(video);
         video.currentTime += frameInterval;
       } else {
         video.removeEventListener('seeked', extract);
       }
     });
 
-    video.currentTime = frameInterval;
+    video.currentTime = 0;
   };
 
-  const drawFrame = (video, startTime, endTime) => {
+  const drawFrame = (video) => {
     const canvas = frameCanvasRef.current;
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     const ctx = canvas.getContext('2d');
 
-    video.currentTime = startTime;
-    video.addEventListener('seeked', function draw() {
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const dataURL = canvas.toDataURL();
-      setFrames((prevFrames) => [
-        ...prevFrames,
-        { src: dataURL, startTime, endTime }
-      ]);
-      video.removeEventListener('seeked', draw);
-    });
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const dataURL = canvas.toDataURL();
+    setFrames((prevFrames) => [
+      ...prevFrames,
+      { src: dataURL, time: video.currentTime }
+    ]);
   };
 
-  const handleMouseDown = (e) => {
+  const getRelativePosition = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
+  };
+
+  const handleStart = (e) => {
+    e.preventDefault();
     setIsDrawing(true);
-    const rect = canvasRef.current.getBoundingClientRect();
-    setStartX(e.clientX - rect.left);
-    setStartY(e.clientY - rect.top);
+    const { x, y } = getRelativePosition(e);
+    setStartX(x);
+    setStartY(y);
   };
 
-  const handleMouseMove = (e) => {
+  const handleMove = (e) => {
     if (!isDrawing) return;
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    e.preventDefault();
+    const { x, y } = getRelativePosition(e);
     setRect({
       x: startX,
       y: startY,
@@ -100,7 +102,8 @@ function EditorPage() {
     drawRectangle();
   };
 
-  const handleMouseUp = () => {
+  const handleEnd = (e) => {
+    e.preventDefault();
     setIsDrawing(false);
   };
 
@@ -109,7 +112,7 @@ function EditorPage() {
     const ctx = canvas?.getContext('2d');
     ctx?.clearRect(0, 0, canvas.width, canvas.height);
     if (mediaType === 'image') {
-      ctx.drawImage(media, 0, 0, canvas.width, canvas.height);
+      ctx?.drawImage(media, 0, 0, canvas.width, canvas.height);
     } else if (mediaType === 'video') {
       const video = videoRef.current;
       if (video) {
@@ -148,9 +151,7 @@ function EditorPage() {
   };
 
   useEffect(() => {
-    if (mediaType === 'image') {
-      drawImage();
-    } else if (mediaType === 'video' && !selectedFrame) {
+    if (mediaType === 'image' || (mediaType === 'video' && !selectedFrame)) {
       drawImage();
     }
   }, [media, mediaType, selectedFrame]);
@@ -199,9 +200,12 @@ function EditorPage() {
               className="drawing-canvas"
               width={800}
               height={450}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
+              onMouseDown={handleStart}
+              onMouseMove={handleMove}
+              onMouseUp={handleEnd}
+              onTouchStart={handleStart}
+              onTouchMove={handleMove}
+              onTouchEnd={handleEnd}
             />
           )}
         </div>

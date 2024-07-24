@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, dividerClasses } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import '../styles/TablePage.css';
 
@@ -23,7 +23,8 @@ function TablePage() {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} 
+      sx={{width: 'auto'}}>
       <Table>
         <TableHead>
           <TableRow>
