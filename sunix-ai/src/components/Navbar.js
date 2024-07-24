@@ -13,9 +13,11 @@ function Navbar() {
           <Link to="/editor" className="nav-link">Editor</Link>
         </Typography>
         <div className="email-container">
+          <Tooltip title="User email" arrow>
             <IconButton edge="end" color="inherit">
               <Avatar alt="User" src="/static/images/avatar/1.jpg" />
             </IconButton>
+          </Tooltip>
           <Typography variant="body2" className="email-display">
             user@example.com
           </Typography>

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, IconButton } from '@mui/material';
-import { PhotoCamera, PlayArrow, Pause } from '@mui/icons-material';
+import { PhotoCamera } from '@mui/icons-material';
 import '../styles/EditorPage.css';
 
 function EditorPage() {
@@ -20,23 +20,26 @@ function EditorPage() {
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
+      // Reset state for new file
+      setFrames([]);
+      setSelectedFrame(null);
+      setIsPlaying(false);
+
       if (file.type.startsWith('image')) {
         const img = new Image();
         img.src = URL.createObjectURL(file);
         img.onload = () => {
           setMedia(img);
           setMediaType('image');
-          setSelectedFrame(null); 
         };
       } else if (file.type.startsWith('video')) {
         const video = document.createElement('video');
         video.src = URL.createObjectURL(file);
-        video.onloadeddata = () => {
+        video.addEventListener('loadedmetadata', () => {
           extractFrames(video);
           setMedia(video);
           setMediaType('video');
-          setSelectedFrame(null); 
-        };
+        });
       }
     }
   };
@@ -47,15 +50,16 @@ function EditorPage() {
 
     setFrames([]);
 
-    video.addEventListener('seeked', function extract() {
+    const handleSeeked = () => {
       if (video.currentTime <= totalDuration) {
         drawFrame(video);
         video.currentTime += frameInterval;
       } else {
-        video.removeEventListener('seeked', extract);
+        video.removeEventListener('seeked', handleSeeked);
       }
-    });
+    };
 
+    video.addEventListener('seeked', handleSeeked);
     video.currentTime = 0;
   };
 
@@ -149,6 +153,16 @@ function EditorPage() {
     setSelectedFrame(frame.src); 
   };
 
+  const handleRemoveAttachment = () => {
+    setMedia(null);
+    setMediaType('');
+    setFrames([]);
+    setSelectedFrame(null);
+    setIsPlaying(false);
+    // Trigger page refresh
+    window.location.reload();
+  };
+
   useEffect(() => {
     if (mediaType === 'image' || (mediaType === 'video' && !selectedFrame)) {
       drawImage();
@@ -173,6 +187,11 @@ function EditorPage() {
         <Button variant="contained" color="primary" className="upload-button">
           Upload
         </Button>
+        {media && (
+          <Button variant="contained" color="secondary" className="remove-button" style={{ marginLeft: '10px' }} onClick={handleRemoveAttachment}>
+            Remove Attachment
+          </Button>
+        )}
       </div>
       <div className="message">
         {media ? 'Editing...' : 'Upload an image or video to start editing.'}
@@ -208,13 +227,13 @@ function EditorPage() {
             />
           )}
         </div>
-        <div className="controls">
+        {/* <div className="controls">
           {mediaType === 'video' && (
             <IconButton onClick={isPlaying ? pauseVideo : playVideo} color="primary">
               {isPlaying ? <Pause /> : <PlayArrow />}
             </IconButton>
           )}
-        </div>
+        </div> */}
       </div>
       {mediaType === 'video' && frames.length > 0 && (
         <div className="frame-thumbnails">
