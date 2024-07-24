@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Button, IconButton } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
 import '../styles/EditorPage.css';
@@ -10,7 +10,6 @@ function EditorPage() {
   const [startX, setStartX] = useState(0);
   const [startY, setStartY] = useState(0);
   const [rect, setRect] = useState({});
-  const [isPlaying, setIsPlaying] = useState(false);
   const [frames, setFrames] = useState([]);
   const [selectedFrame, setSelectedFrame] = useState(null);
   const canvasRef = useRef(null);
@@ -23,7 +22,6 @@ function EditorPage() {
       // Reset state for new file
       setFrames([]);
       setSelectedFrame(null);
-      setIsPlaying(false);
 
       if (file.type.startsWith('image')) {
         const img = new Image();
@@ -77,6 +75,20 @@ function EditorPage() {
     ]);
   };
 
+  const drawImage = useCallback(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    ctx?.clearRect(0, 0, canvas.width, canvas.height);
+    if (mediaType === 'image') {
+      ctx?.drawImage(media, 0, 0, canvas.width, canvas.height);
+    } else if (mediaType === 'video') {
+      const video = videoRef.current;
+      if (video) {
+        ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
+      }
+    }
+  }, [media, mediaType]);
+
   const getRelativePosition = (e) => {
     const rect = canvasRef.current.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -110,20 +122,6 @@ function EditorPage() {
     setIsDrawing(false);
   };
 
-  const drawImage = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-    ctx?.clearRect(0, 0, canvas.width, canvas.height);
-    if (mediaType === 'image') {
-      ctx?.drawImage(media, 0, 0, canvas.width, canvas.height);
-    } else if (mediaType === 'video') {
-      const video = videoRef.current;
-      if (video) {
-        ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
-      }
-    }
-  };
-
   const drawRectangle = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -133,16 +131,6 @@ function EditorPage() {
       ctx.lineWidth = 2;
       ctx?.strokeRect(rect.x, rect.y, rect.width, rect.height);
     }
-  };
-
-  const playVideo = () => {
-    setIsPlaying(true);
-    videoRef.current?.play();
-  };
-
-  const pauseVideo = () => {
-    setIsPlaying(false);
-    videoRef.current?.pause();
   };
 
   const handleTimeUpdate = () => {
@@ -158,7 +146,6 @@ function EditorPage() {
     setMediaType('');
     setFrames([]);
     setSelectedFrame(null);
-    setIsPlaying(false);
     // Trigger page refresh
     window.location.reload();
   };
@@ -167,7 +154,7 @@ function EditorPage() {
     if (mediaType === 'image' || (mediaType === 'video' && !selectedFrame)) {
       drawImage();
     }
-  }, [media, mediaType, selectedFrame]);
+  }, [media, mediaType, selectedFrame, drawImage]);
 
   return (
     <div className="editor-container">
@@ -188,8 +175,14 @@ function EditorPage() {
           Upload
         </Button>
         {media && (
-          <Button variant="contained" color="secondary" className="remove-button" style={{ marginLeft: '10px' }} onClick={handleRemoveAttachment}>
-            Remove Attachment
+          <Button
+            variant="contained"
+            color="secondary"
+            className="remove-button"
+            style={{ marginLeft: '10px' }}
+            onClick={handleRemoveAttachment}
+          >
+            Remove
           </Button>
         )}
       </div>
@@ -227,13 +220,6 @@ function EditorPage() {
             />
           )}
         </div>
-        {/* <div className="controls">
-          {mediaType === 'video' && (
-            <IconButton onClick={isPlaying ? pauseVideo : playVideo} color="primary">
-              {isPlaying ? <Pause /> : <PlayArrow />}
-            </IconButton>
-          )}
-        </div> */}
       </div>
       {mediaType === 'video' && frames.length > 0 && (
         <div className="frame-thumbnails">
