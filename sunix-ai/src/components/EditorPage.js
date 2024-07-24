@@ -26,7 +26,7 @@ function EditorPage() {
         img.onload = () => {
           setMedia(img);
           setMediaType('image');
-          setSelectedFrame(null); // Clear selected frame when a new image is uploaded
+          setSelectedFrame(null); 
         };
       } else if (file.type.startsWith('video')) {
         const video = document.createElement('video');
@@ -35,17 +35,16 @@ function EditorPage() {
           extractFrames(video);
           setMedia(video);
           setMediaType('video');
-          setSelectedFrame(null); // Clear selected frame when a new video is uploaded
+          setSelectedFrame(null); 
         };
       }
     }
   };
 
   const extractFrames = (video) => {
-    const frameInterval = 2; // Extract a frame every 2 seconds
+    const frameInterval = 2; 
     const totalDuration = video.duration;
 
-    // Clear previous frames
     setFrames([]);
 
     video.addEventListener('seeked', function extract() {
@@ -124,7 +123,7 @@ function EditorPage() {
   const drawRectangle = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    drawImage(); // Draw the image or video frame first
+    drawImage(); 
     if (isDrawing) {
       ctx.strokeStyle = 'red';
       ctx.lineWidth = 2;
@@ -147,7 +146,7 @@ function EditorPage() {
   };
 
   const handleFrameClick = (frame) => {
-    setSelectedFrame(frame.src); // Set the selected frame as the main image
+    setSelectedFrame(frame.src); 
   };
 
   useEffect(() => {
