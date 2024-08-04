@@ -1,0 +1,56 @@
+/* /app/styles/StaffTable.module.css */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffff;
+  border-radius: 10px;
+}
+
+.table th, .table td {
+  padding: 20px; 
+  text-align: left;
+  border-bottom: 0.5px solid #f8f7f7; 
+  position: relative; 
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.table th:first-child, .table td:first-child {
+  width: 50px; 
+}
+
+/* .table td:last-child {
+  color: rgb(12, 12, 189); 
+  text-decoration: underline blue;
+} */
+
+.table th:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: 0; 
+  top: 50%; /* Center vertically */
+  height: 20%; /* Border line height */
+  width: 1px; /* Border line width */
+  background-color: rgb(201, 200, 200); /* Border color */
+  transform: translateY(-50%); /* Center the line vertically */
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table th {
+  color: rgb(8, 0, 0);
+  line-height: 1.5; /* Increase line height for header */
+  text-align: center;
+}
+
+.table a {
+  color: #1308af;
+  text-decoration: underline #1308af;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}

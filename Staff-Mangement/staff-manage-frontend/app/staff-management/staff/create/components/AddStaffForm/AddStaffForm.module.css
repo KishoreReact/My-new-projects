@@ -1,0 +1,182 @@
+.container {
+  width: 100%;
+  background-color: #FBFBFB;
+  border-radius: 8px;
+}
+
+.section {
+  margin-bottom: 20px;
+  background-color: #F6F6F8;
+}
+.section2 {
+  margin: 0px 45px 20px 0px;
+  background-color: #F6F6F8;
+  width: fit-content;
+}
+.section2S {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .section2S {
+      display: block;
+  }}
+
+
+.section5{
+  margin-bottom: 20px;
+  background-color: #F6F6F8;
+  display: flex;
+}
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  gap: 73px;
+  padding: 30px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .row {
+      display: block;
+  }}
+
+.column1 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 17%;
+  align-items: center;
+}
+.column2 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 32%;
+}
+.column3 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 32%;
+}
+
+.photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.photo img {
+  width: 142px;
+  height: 142px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.editPhoto {
+  margin-top: 8px;
+  padding: 4px 8px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.childrenCount {
+  display: flex;
+  flex-direction: column;
+}
+
+.childrenCount div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.buttonRow {
+  display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.buttoncol{
+  display: flex;
+  flex-direction: column;
+}
+.buttonContainer {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: fit-content;
+  margin: 30px 0px;
+}
+
+.leftSection {
+  padding: 13px 20px;
+  color: #666;
+  border-right: 1px solid #aaf4fd;
+  flex-grow: 1;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.rightSection {
+  padding: 13px 20px;
+  background-color: #acf5ff;
+  color: #1709d3;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+}
+
+.childrenCount {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+
+.childrenCount label {
+  margin-bottom: 0.5rem;
+}
+
+.childrenCount div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .childrenCount div {
+     flex-direction: column;
+  }}
+
+  
+.childrenCount button {
+  background-color: #ffff;
+    color: #091fbb;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.childrenCount button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.childrenCount input {
+  width: 30px;
+    text-align: center;
+    border: none;
+}

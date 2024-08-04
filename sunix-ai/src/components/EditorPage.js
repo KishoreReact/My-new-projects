@@ -43,7 +43,7 @@ function EditorPage() {
   };
 
   const extractFrames = (video) => {
-    const frameInterval = 2; 
+    const frameInterval = 2;
     const totalDuration = video.duration;
 
     setFrames([]);
@@ -125,7 +125,7 @@ function EditorPage() {
   const drawRectangle = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    drawImage(); 
+    drawImage();
     if (isDrawing) {
       ctx.strokeStyle = 'red';
       ctx.lineWidth = 2;
@@ -138,7 +138,7 @@ function EditorPage() {
   };
 
   const handleFrameClick = (frame) => {
-    setSelectedFrame(frame.src); 
+    setSelectedFrame(frame.src);
   };
 
   const handleRemoveAttachment = () => {

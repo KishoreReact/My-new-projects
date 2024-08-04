@@ -1,0 +1,18 @@
+.primary {
+    padding: 10px 20px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .secondary {
+    padding: 10px 20px;
+    background-color: #FBFBFB;
+    color: #0070f3;
+    border:none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

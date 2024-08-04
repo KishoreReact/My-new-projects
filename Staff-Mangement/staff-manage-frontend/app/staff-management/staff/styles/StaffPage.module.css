@@ -1,0 +1,6 @@
+
+@media (max-width: 768px) {
+    .staff{
+        overflow-x: auto;
+        max-width: 90%;
+    }}
