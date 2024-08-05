@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #fff; /* White background color */
+  background-color: #fff; 
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -14,7 +14,7 @@
 
 
 .leftSection .companyLogo {
-  height: 40px; /* Adjust height as needed */
+  height: 40px; 
 }
 .notificationIcon {
   font-size: 1.5rem;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SuccessPopup.module.css'; // Import your custom styles
+import styles from './SuccessPopup.module.css'; 
 
 const SuccessPopup = ({ onClose }) => {
   return (

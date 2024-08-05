@@ -1,4 +1,4 @@
-"use client"; // Mark this file as a Client Component
+"use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 import StaffTable from './StaffTable';
@@ -13,9 +13,10 @@ import { useRouter } from 'next/navigation';
 export default function StaffList({ staffData }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(10); // Example value
+  const [totalPages, setTotalPages] = useState(10);
   const [isFilterPopupOpen, setIsFilterPopupOpen] = useState(false);
   const [staffData3, setStaffData3] = useState([]);
+  const [role, setRole] = useState(''); // New state for selected role
 
   const popupRef = useRef();
   const router = useRouter();
@@ -44,34 +45,26 @@ export default function StaffList({ staffData }) {
     fetchStaffData();
   }, []);
 
-
-  const staffData2 = [
-    { id: 1, name: 'Bhuvesh Kumar', employeeId: '123492', jobRole: 'Sales Person', phoneNumber: '+91 8762638718' },
-    { id: 2, name: 'Jane Doe', employeeId: '123493', jobRole: 'Developer', phoneNumber: '+91 8762638719' },
-    { id: 3, name: 'John Smith', employeeId: '123494', jobRole: 'Manager', phoneNumber: '+91 8762638720' },
-    { id: 4, name: 'Alice Johnson', employeeId: '123495', jobRole: 'Designer', phoneNumber: '+91 8762638721' },
-    // Add more staff members as needed
-  ];
-
   const filteredStaff = staffData3.filter(member =>
-    member.name.toLowerCase().includes(searchTerm.toLowerCase())
+    member.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (role ? member.jobRole === role : true) // Filter by role if a role is selected
   );
 
   const handleSearch = (term) => setSearchTerm(term);
   const handlePageChange = (page) => setCurrentPage(page);
-  
 
   const handleAdd = () => {
-     router.push('staff-management/staff/create')
+    router.push('staff-management/staff/create')
   };
   const handleFilter = () => setIsFilterPopupOpen(true);
   const handleCloseFilterPopup = () => setIsFilterPopupOpen(false);
-  const handleApplyFilter = () => {
-    // Apply filter logic
+  const handleApplyFilter = (selectedRole) => {
+    setRole(selectedRole);
     setIsFilterPopupOpen(false);
   };
   const handleClearFilter = () => {
-    // Clear filter logic
+    setRole(''); // Clear the selected role
+    setIsFilterPopupOpen(false);
   };
 
   useEffect(() => {
@@ -109,6 +102,7 @@ export default function StaffList({ staffData }) {
             onClose={handleCloseFilterPopup}
             onApply={handleApplyFilter}
             onClear={handleClearFilter}
+            setRole={setRole}
           />
         </div>
       )}

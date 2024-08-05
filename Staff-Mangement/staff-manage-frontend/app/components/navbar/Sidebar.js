@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Sidebar.module.css';
-import { FaHome, FaUsers, FaFileAlt } from 'react-icons/fa'; // Example icons
+import { FaHome, FaUsers, FaFileAlt } from 'react-icons/fa'; 
 
 const Sidebar = () => {
   const router = useRouter();

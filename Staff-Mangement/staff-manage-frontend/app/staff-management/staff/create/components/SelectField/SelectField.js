@@ -1,10 +1,13 @@
 import React from 'react';
-import styles from './SelectField.module.css'; // You might want to create a separate CSS module for SelectField
+import styles from './SelectField.module.css'; 
 
-const SelectField = ({ label, name, value, onChange, options }) => {
+const SelectField = ({ label, name, value, onChange, options, required }) => {
   return (
     <div className={styles.container}>
-      <label className={styles.label}>{label}</label>
+      <label className={styles.label}>
+        {label}
+        {required && <span className={styles.requiredStar}>*</span>}
+      </label>
       <select
         className={styles.input}
         name={name}

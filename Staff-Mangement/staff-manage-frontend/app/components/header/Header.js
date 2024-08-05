@@ -1,5 +1,4 @@
-import styles from '../../styles/Header.module.css';
-import { FaBell, FaSignOutAlt } from 'react-icons/fa';
+import styles from './Header.module.css';
 
 const Header = () => {
   return (
@@ -11,11 +10,6 @@ const Header = () => {
       <img src="/images/Notification.png" alt="Notification Logo" className={styles.notificationIcon} />
         <div className={styles.profile}>
         <img src="/images/frameLog.png" alt="Log"  />
-          {/* <img src="/images/profile-pic.png" alt="Profile" className={styles.profilePic} />
-          <div className={styles.profileDetails}>
-            <div className={styles.profileName}>[User Name]</div>
-            <div className={styles.profilePosition}>Position</div>
-          </div> */}
         </div>
         <img src="/images/Export.png" alt="Export"className={styles.logoutIcon} />
       </div>

@@ -36,7 +36,7 @@
   gap: 16px;
   gap: 73px;
   padding: 30px;
-  align-items: center;
+  align-items: baseline;
 }
 
 @media (max-width: 768px) {
@@ -70,6 +70,8 @@
   align-items: center;
   justify-content: center;
   width: 50%;
+  position: relative;
+
 }
 
 .photo img {
@@ -77,16 +79,33 @@
   height: 142px;
   border-radius: 50%;
   background-color: #ccc;
+  display: block; /* Ensure there's no extra space below the image */
+  margin: 0 auto;
 }
 
 .editPhoto {
   margin-top: 8px;
-  padding: 4px 8px;
-  background-color: #0070f3;
-  color: white;
+  background-color: #f7f7f7;
+  color: rgb(221, 220, 220);
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 0px 0px 3px 70px;
+  padding: 6px 7px 4px 6px;
+  background-color: #4942b9;
+  border-radius: 20px;
+  position: absolute; /* Position the icon relative to the photo container */
+  bottom: 0; /* Move it to the bottom of the container */
+  left: 50%; /* Center the icon horizontally */
+  transform: translate(-50%, 50%); /* Adjust the position upwards */
+  border-radius: 50%; /* Optional: make the background circular */
+  padding: 5px; 
+}
+
+.editimage{
+  height: 28px;
+  width: 28px;
+  background-color: #4646b1;
 }
 
 .childrenCount {
@@ -126,7 +145,6 @@
   border-right: 1px solid #aaf4fd;
   flex-grow: 1;
   text-align: center;
-  border-radius: 10px;
 }
 
 .rightSection {
@@ -179,4 +197,34 @@
   width: 30px;
     text-align: center;
     border: none;
+}
+.profilepic{
+  padding: 0px 35px 15px 0px;
+    width: 120%;
+    color: #bbb7b7;
+}
+.phoneNumber{
+  width:  54%;
+  border: none;
+}
+.phoneContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.numberlabel{
+  width: max-content;
+  margin-top: 4px;
+}
+.movedUp {
+  position: relative;
+  top: -10px; /* Move it upwards by 8 pixels, adjust as needed */
+}
+.inputNumber{
+  margin-top: 17px;
+  width:  70%;
+  
+}
+.disableButton{
+  background-color: #666;
 }
