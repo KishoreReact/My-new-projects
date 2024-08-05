@@ -65,6 +65,13 @@ const AddStaffForm = () => {
     if (!formData.gender) newErrors.gender = 'Gender is required';
     if (!formData.jobRole) newErrors.jobRole = 'Job Role is required';
     if (!formData.joiningDate) newErrors.joiningDate = 'Joining Date is required';
+    if (!formData.houseStreetArea) newErrors.houseStreetArea = 'House No, Street, Area is required';
+    if (!formData.village) newErrors.village = 'Village is required';
+    if (!formData.district) newErrors.district = 'District is required';
+    if (!formData.state) newErrors.state = 'State is required';
+    if (!formData.country) newErrors.country = 'Country is required';
+    if (!formData.pinCode) newErrors.pinCode = 'PIN Code is required';
+    if (!formData.education) newErrors.education = 'Education is required';
     // Add more validation rules as needed
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -351,11 +358,13 @@ const AddStaffForm = () => {
                 type="submit" 
                 disabled={isButtonDisabled} 
                 loading={loading}
+                className={isButtonDisabled ? styles.disabledButton : ''}
+                data-tooltip={isButtonDisabled ? "Please fill all mandatory fields" : ""}
               />
               <Button 
                 label="Cancel" 
                 type="button" 
-                disabled={!isButtonDisabled}
+                disabled={loading}
                 onClick={handleCancel} 
               />
             </div>

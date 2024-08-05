@@ -27,7 +27,9 @@
     height: 50px;
     color: #eef0f0;
   }
-  
+  .active{
+    background-color: #050C9C;
+  }
   .link {
     display: flex;
     align-items: center;

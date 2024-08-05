@@ -1,4 +1,6 @@
+'use client'
 import { useRouter } from 'next/navigation';
+//import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Sidebar.module.css';
 import { FaHome, FaUsers, FaFileAlt } from 'react-icons/fa'; 
@@ -6,6 +8,8 @@ import { FaHome, FaUsers, FaFileAlt } from 'react-icons/fa';
 const Sidebar = () => {
   const router = useRouter();
   const { pathname } = router;
+  //const pathname = usePathname();
+console.log(pathname);
 
   return (
     <aside className={styles.sidebar}>
